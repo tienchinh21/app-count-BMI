@@ -16,6 +16,8 @@ a {
 }
 .grid {
     display: grid;
+    justify-content: center;
+    justify-items: center;
 }
 table {
     width: 100%;
@@ -63,6 +65,7 @@ input[type="text"] {
     margin-bottom: 10px;
     outline:none;
     border:none;
+    width: 300px;
 }
 input:hover {
     outline: none;
