@@ -1,38 +1,70 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.input-wrapper {
+    display: flex;
+    justify-content: center;
+}
+/* .pd_10px {
+    padding: 10px;
+}
+.mgb_10px {
+    margin-bottom: 20px;
+} */
+a {
+    text-decoration: none;
+}
+.grid {
+    display: grid;
+}
+table {
+    width: 100%;
+}
+.btn {
+    display: flex;
+    padding: 5px;
+    outline: none;
+    border: 1px solid #062b35;
+    color: #fff;
+    background-color: #a03f6c;
+}
+.ex {
+   margin-bottom: 20px;
+}
+.question {
+    display: flex;
+    justify-content: center;
+}
+.btn-home {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #a03f6c;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btn-home:hover {
+    background-color: #801f49;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    outline:none;
+    border:none;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input:hover {
+    outline: none;
+    border: none;
 }
