@@ -75,13 +75,13 @@ const Examination = () => {
                                 </label>
 
                                 <div className="question">
-                                    <input type="radio" id='ex2a' onChange={() => handleAnswerChange('ex2', 'a')} />
+                                    <input type="radio" name='ex2' id='ex2a' onChange={() => handleAnswerChange('ex2', 'a')} />
                                     <label htmlFor="ex2a">42</label>
 
-                                    <input type="radio" id='ex2b' onChange={() => handleAnswerChange('ex2', 'b')} />
+                                    <input type="radio" name='ex2' id='ex2b' onChange={() => handleAnswerChange('ex2', 'b')} />
                                     <label htmlFor="ex2b">14</label>
 
-                                    <input type="radio" id='ex2c' onChange={() => handleAnswerChange('ex2', 'c')} />
+                                    <input type="radio" name='ex2' id='ex2c' onChange={() => handleAnswerChange('ex2', 'c')} />
                                     <label htmlFor="ex2c">24</label>
                                 </div>
                             </div>
@@ -91,13 +91,13 @@ const Examination = () => {
                                     <b>3. Result 160 * 15 ? (20)</b>
                                 </label>
                                 <div className="question">
-                                    <input type="radio" id='ex3a' onChange={() => handleAnswerChange('ex3', 'a')} />
+                                    <input type="radio" name='ex3' id='ex3a' onChange={() => handleAnswerChange('ex3', 'a')} />
                                     <label htmlFor="ex3a">2400</label>
 
-                                    <input type="radio" id='ex3b' onChange={() => handleAnswerChange('ex3', 'b')} />
+                                    <input type="radio" name='ex3' id='ex3b' onChange={() => handleAnswerChange('ex3', 'b')} />
                                     <label htmlFor="ex3b">1400</label>
 
-                                    <input type="radio" id='ex3c' onChange={() => handleAnswerChange('ex3', 'c')} />
+                                    <input type="radio" name='ex3' id='ex3c' onChange={() => handleAnswerChange('ex3', 'c')} />
                                     <label htmlFor="ex3c">2004</label>
                                 </div>
                             </div>
@@ -108,13 +108,13 @@ const Examination = () => {
                                 </label>
 
                                 <div className="question">
-                                    <input type="radio" id='ex4a' onChange={() => handleAnswerChange('ex4', 'a')} />
+                                    <input type="radio" name='ex4' id='ex4a' onChange={() => handleAnswerChange('ex4', 'a')} />
                                     <label htmlFor="ex4a">2040</label>
 
-                                    <input type="radio" id='ex4b' onChange={() => handleAnswerChange('ex4', 'b')} />
+                                    <input type="radio" name='ex4' id='ex4b' onChange={() => handleAnswerChange('ex4', 'b')} />
                                     <label htmlFor="ex4b">1400</label>
 
-                                    <input type="radio" id='ex4c' onChange={() => handleAnswerChange('ex4', 'c')} />
+                                    <input type="radio" name='ex4' id='ex4c' onChange={() => handleAnswerChange('ex4', 'c')} />
                                     <label htmlFor="ex4c">2</label>
                                 </div>
                             </div>
@@ -125,14 +125,13 @@ const Examination = () => {
                                 </label>
 
                                 <div className="question">
-                                    <input type="radio" id='ex5a' onChange={() => handleAnswerChange('ex5', 'a')} />
-
+                                    <input type="radio" name='ex5' id='ex5a' onChange={() => handleAnswerChange('ex5', 'a')} />
                                     <label htmlFor="ex5a">2050</label>
 
-                                    <input type="radio" id='ex5b' onChange={() => handleAnswerChange('ex5', 'b')} />
+                                    <input type="radio" name='ex5' id='ex5b' onChange={() => handleAnswerChange('ex5', 'b')} />
                                     <label htmlFor="ex5b">1500</label>
 
-                                    <input type="radio" id='ex5c' onChange={() => handleAnswerChange('ex5', 'c')} />
+                                    <input type="radio" name='ex5' id='ex5c' onChange={() => handleAnswerChange('ex5', 'c')} />
                                     <label htmlFor="ex5c">4</label></div>
                             </div>
                         </tr>
