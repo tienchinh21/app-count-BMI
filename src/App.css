@@ -57,7 +57,9 @@ table {
 .btn-home:hover {
     background-color: #801f49;
 }
-input[type="text"] {
+input[type="text"],
+input[type="password"]
+ {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;

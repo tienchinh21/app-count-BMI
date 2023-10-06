@@ -44,7 +44,7 @@ const Login = () => {
                         />
                         <input
                             className='mgb_10px pd_10px'
-                            type="text"
+                            type="password"
                             placeholder="Mật khẩu"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
