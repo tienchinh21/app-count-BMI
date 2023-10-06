@@ -44,12 +44,12 @@ const Login = () => {
                         />
                         <input
                             className='mgb_10px pd_10px'
-                            type="password"
+                            type="text"
                             placeholder="Mật khẩu"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                         />
-                        <button className='mgb_10px ' onClick={handleLogin}>Đăng nhập</button>
+                        <button className='btn-home' onClick={handleLogin}>Đăng nhập</button>
                     </div>
                 </div>
             </div>
