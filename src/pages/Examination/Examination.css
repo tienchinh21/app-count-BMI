@@ -8,3 +8,17 @@ button {
     transition: background-color 0.3s;
     margin-top: 20px;
 }
+.question.wrong {
+    background-color: #a31616;
+}
+.wrapper {
+    display: inline-block;
+}
+table {
+    width: 500px;
+}
+
+
+
+
+

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Examination.css';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Examination = () => {
     const [answers, setAnswers] = useState({
@@ -12,6 +13,29 @@ const Examination = () => {
     });
 
     const [answeredQuestions, setAnsweredQuestions] = useState([]);
+    const [correctAnswers, setCorrectAnswers] = useState({});
+    const [wrong, setWrong] = useState({});
+    const [showRetryButton, setShowRetryButton] = useState(false);
+
+    const resetState = () => {
+        setAnswers({
+            ex1: '',
+            ex2: '',
+            ex3: '',
+            ex4: '',
+            ex5: '',
+        });
+
+        setAnsweredQuestions([]);
+        setCorrectAnswers({});
+        setWrong({});
+        setShowRetryButton(false);
+    };
+
+    const clearRadioButtons = () => {
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(button => (button.checked = false));
+    };
 
     const handleAnswerChange = (question, answer) => {
         setAnswers({
@@ -24,8 +48,11 @@ const Examination = () => {
             : [...answeredQuestions, question];
 
         setAnsweredQuestions(newAnsweredQuestions);
-    };
 
+        const newCorrectAnswers = { ...correctAnswers };
+        delete newCorrectAnswers[question];
+        setCorrectAnswers(newCorrectAnswers);
+    };
 
     const handleSubmit = () => {
         if (answeredQuestions.length === 5) {
@@ -38,17 +65,49 @@ const Examination = () => {
             };
 
             let score = 0;
+            const wrong = {};
+
             for (const question in answers) {
                 if (answers[question] === correctAnswers[question]) {
                     score += 20;
+                } else {
+                    wrong[question] = true;
+                    setCorrectAnswers(prev => ({
+                        ...prev,
+                        [question]: correctAnswers[question],
+                    }));
                 }
             }
-            alert(`Your score is ${score} out of 100`);
+
+            Swal.fire({
+                title: `Điểm của bạn là ${score} / 100`,
+                showCancelButton: true,
+                confirmButtonText: 'Xem lỗi sai',
+                cancelButtonText: 'Làm lại',
+                reverseButtons: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Xem lỗi
+                    console.log('Xem lỗi');
+                    setWrong(wrong);
+                    setShowRetryButton(true);
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // Làm lại
+                    console.log('lam bai lai');
+                    handleRetry();
+                }
+            });
         }
     };
+
     const submitButton = {
         backgroundColor: answeredQuestions.length === 5 ? '#00A86B' : 'rgb(68 87 66)',
         cursor: answeredQuestions.length === 5 ? 'pointer' : 'not-allowed',
+    };
+
+    const handleRetry = () => {
+        resetState();
+        clearRadioButtons();
     };
 
     return (
@@ -65,7 +124,7 @@ const Examination = () => {
                                         <b>1. Result 10 + 5 ? (20)</b>
                                     </label>
 
-                                    <div className="question">
+                                    <div className={`question ${wrong['ex1'] ? 'wrong' : ''}`}>
                                         <input type="radio" name="ex1" id="ex1a" onChange={() => handleAnswerChange('ex1', 'a')} />
                                         <label htmlFor="ex1a">15</label>
 
@@ -77,11 +136,11 @@ const Examination = () => {
                                     </div>
                                 </div>
 
-                                <div className="ex ex2">
+                                <div className={`ex ex2`}>
                                     <label htmlFor="">
                                         <b>2. Result 120/ 5 ? (20)</b>
                                     </label>
-                                    <div className="question">
+                                    <div className={`question ${wrong['ex2'] ? 'wrong' : ''}`}>
                                         <input type="radio" name='ex2' id='ex2a' onChange={() => handleAnswerChange('ex2', 'a')} />
                                         <label htmlFor="ex2a">42</label>
 
@@ -93,11 +152,11 @@ const Examination = () => {
                                     </div>
                                 </div>
 
-                                <div className="ex ex3">
+                                <div className={`ex ex3`}>
                                     <label htmlFor="">
                                         <b>3. Result 160 * 15 ? (20)</b>
                                     </label>
-                                    <div className="question">
+                                    <div className={`question ${wrong['ex3'] ? 'wrong' : ''}`}>
                                         <input type="radio" name='ex3' id='ex3a' onChange={() => handleAnswerChange('ex3', 'a')} />
                                         <label htmlFor="ex3a">2400</label>
 
@@ -109,12 +168,12 @@ const Examination = () => {
                                     </div>
                                 </div>
 
-                                <div className="ex ex4">
+                                <div className={`ex ex4`}>
                                     <label htmlFor="">
                                         <b>4. Result 1 + 1 ? (20)</b>
                                     </label>
 
-                                    <div className="question">
+                                    <div className={`question ${wrong['ex4'] ? 'wrong' : ''}`}>
                                         <input type="radio" name='ex4' id='ex4a' onChange={() => handleAnswerChange('ex4', 'a')} />
                                         <label htmlFor="ex4a">2040</label>
 
@@ -126,12 +185,12 @@ const Examination = () => {
                                     </div>
                                 </div>
 
-                                <div className="ex ex5">
+                                <div className={`ex ex5`}>
                                     <label htmlFor="">
                                         <b>5. Result 1 + 3 ? (20)</b>
                                     </label>
 
-                                    <div className="question">
+                                    <div className={`question ${wrong['ex5'] ? 'wrong' : ''}`}>
                                         <input type="radio" name='ex5' id='ex5a' onChange={() => handleAnswerChange('ex5', 'a')} />
                                         <label htmlFor="ex5a">2050</label>
 
@@ -143,11 +202,15 @@ const Examination = () => {
                                     </div>
                                 </div>
                             </td>
-
                         </tr>
                         <tr>
                             <td>
-                                <button style={submitButton} onClick={handleSubmit}>Submit</button>
+                                <button
+                                    style={submitButton}
+                                    onClick={showRetryButton ? handleRetry : handleSubmit}
+                                >
+                                    {showRetryButton ? 'Làm lại bài thi' : 'Submit'}
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -158,3 +221,4 @@ const Examination = () => {
 };
 
 export default Examination;
+
