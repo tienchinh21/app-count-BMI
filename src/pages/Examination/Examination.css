@@ -17,7 +17,9 @@ button {
 table {
     width: 500px;
 }
-
+.retryButton {
+    cursor: pointer;
+}
 
 
 

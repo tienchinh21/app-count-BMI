@@ -13,9 +13,37 @@ const Examination = () => {
     });
 
     const [answeredQuestions, setAnsweredQuestions] = useState([]);
+
     const [correctAnswers, setCorrectAnswers] = useState({});
+
     const [wrong, setWrong] = useState({});
+
     const [showRetryButton, setShowRetryButton] = useState(false);
+
+    const [countDown, setCountDown] = useState(30);
+
+    const [isTimeUp, setIsTimeUp] = useState(false);
+
+    const [showResults, setShowResults] = useState(false);
+
+    let timer;
+
+    useEffect(() => {
+        if (countDown === 0) {
+            setIsTimeUp(true);
+            if (answeredQuestions.length <= 5) {
+                setShowResults(true);
+                handleSubmit();
+            }
+        } else if (countDown > 0 && answeredQuestions.length <= 5) {
+            timer = setTimeout(() => {
+                setCountDown(prev => prev - 1);
+            }, 1000);
+        }
+        return () => clearTimeout(timer);
+    }, [countDown, answeredQuestions, isTimeUp]);
+
+
 
     const resetState = () => {
         setAnswers({
@@ -30,11 +58,7 @@ const Examination = () => {
         setCorrectAnswers({});
         setWrong({});
         setShowRetryButton(false);
-    };
-
-    const clearRadioButtons = () => {
-        const radioButtons = document.querySelectorAll('input[type="radio"]');
-        radioButtons.forEach(button => (button.checked = false));
+        setCountDown(30);
     };
 
     const handleAnswerChange = (question, answer) => {
@@ -43,19 +67,20 @@ const Examination = () => {
             [question]: answer,
         });
 
-        const newAnsweredQuestions = answeredQuestions.includes(question)
-            ? answeredQuestions
-            : [...answeredQuestions, question];
+        const newAnsweredQuestions = answeredQuestions.includes(question) ? answeredQuestions : [...answeredQuestions, question];
 
         setAnsweredQuestions(newAnsweredQuestions);
 
         const newCorrectAnswers = { ...correctAnswers };
+
         delete newCorrectAnswers[question];
+
         setCorrectAnswers(newCorrectAnswers);
     };
 
     const handleSubmit = () => {
-        if (answeredQuestions.length === 5) {
+
+        if (answeredQuestions.length === 5 || isTimeUp) {
             const correctAnswers = {
                 ex1: 'a',
                 ex2: 'c',
@@ -79,6 +104,9 @@ const Examination = () => {
                 }
             }
 
+            setShowResults(true);
+            setShowRetryButton(true);
+
             Swal.fire({
                 title: `Điểm của bạn là ${score} / 100`,
                 showCancelButton: true,
@@ -101,14 +129,22 @@ const Examination = () => {
     };
 
     const submitButton = {
-        backgroundColor: answeredQuestions.length === 5 ? '#00A86B' : 'rgb(68 87 66)',
-        cursor: answeredQuestions.length === 5 ? 'pointer' : 'not-allowed',
+        backgroundColor: showResults ? '#FF0000' : answeredQuestions.length === 5 ? '#00A86B' : 'rgb(68 87 66)',
+        cursor: showResults || isTimeUp ? 'default' : 'pointer',
+    };
+
+    const clearRadioButtons = () => {
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(button => (button.checked = false));
     };
 
     const handleRetry = () => {
+        setIsTimeUp(false);
+        setShowResults(false);
         resetState();
         clearRadioButtons();
     };
+
 
     return (
         <>
@@ -215,6 +251,9 @@ const Examination = () => {
                         </tr>
                     </tbody>
                 </table>
+                <div className="timer">
+                    Thời gian còn lại: {Math.floor(countDown / 60)}:{('0' + (countDown % 60)).slice(-2)}
+                </div>
             </div>
         </>
     );
