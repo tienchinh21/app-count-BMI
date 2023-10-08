@@ -44,7 +44,6 @@ const Examination = () => {
     }, [countDown, answeredQuestions, isTimeUp]);
 
 
-
     const resetState = () => {
         setAnswers({
             ex1: '',
@@ -107,24 +106,37 @@ const Examination = () => {
             setShowResults(true);
             setShowRetryButton(true);
 
-            Swal.fire({
-                title: `Điểm của bạn là ${score} / 100`,
-                showCancelButton: true,
-                confirmButtonText: 'Xem lỗi sai',
-                cancelButtonText: 'Làm lại',
-                reverseButtons: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Xem lỗi
-                    console.log('Xem lỗi');
-                    setWrong(wrong);
-                    setShowRetryButton(true);
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    // Làm lại
-                    console.log('lam bai lai');
+            if (score === 100) {
+                setWrong(wrong);
+                setShowRetryButton(true);
+
+                Swal.fire({
+                    title: `Perfect Score! Điểm của bạn là ${score} / 100`,
+                    icon: 'success',
+                    confirmButtonText: 'Làm lại',
+                }).then(() => {
                     handleRetry();
-                }
-            });
+                });
+            } else {
+                Swal.fire({
+                    title: `Điểm của bạn là ${score} / 100`,
+                    showCancelButton: true,
+                    confirmButtonText: 'Xem lỗi sai',
+                    cancelButtonText: 'Làm lại',
+                    reverseButtons: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Xem lỗi
+                        console.log('Xem lỗi');
+                        setWrong(wrong);
+                        setShowRetryButton(true);
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        // Làm lại
+                        console.log('lam bai lai');
+                        handleRetry();
+                    }
+                });
+            }
         }
     };
 
