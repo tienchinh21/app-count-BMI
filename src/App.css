@@ -2,8 +2,8 @@
   text-align: center;
 }
 .input-wrapper {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 /* .pd_10px {
     padding: 10px;
@@ -12,64 +12,37 @@
     margin-bottom: 20px;
 } */
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 .grid {
-    display: grid;
-    justify-content: center;
-    justify-items: center;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
 }
 table {
-    width: 100%;
-}
-.btn {
-    display: flex;
-    padding: 5px;
-    outline: none;
-    border: 1px solid #062b35;
-    color: #fff;
-    background-color: #a03f6c;
-}
-.ex {
-   margin-bottom: 20px;
-}
-.question {
-    display: flex;
-    justify-content: center;
-}
-.btn-home {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    background-color: #a03f6c;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-right: 20px;
-    margin-top: 20px;
+  width: 100%;
 }
 
-.btn-home:hover {
-    background-color: #801f49;
+.ex {
+  margin-bottom: 20px;
 }
+.question {
+  display: flex;
+  justify-content: center;
+}
+
 input[type="text"],
-input[type="password"]
- {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    outline:none;
-    border:none;
-    width: 300px;
+input[type="password"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  outline: none;
+  border: none;
+  width: 300px;
 }
 input:hover {
-    outline: none;
-    border: none;
+  outline: none;
+  border: none;
 }
